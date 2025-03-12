@@ -1,22 +1,46 @@
 import React from "react";
-import { auth } from "@/auth";
-import Link from "next/link";
+import { signOut } from "@/utils/supabase/actions";
+import { createClientForServer } from "@/utils/supabase/server";
+import { signInWithGoogle } from "@/utils/supabase/actions";
 
 export default async function Home() {
-  const session = await auth();
+  const supabase = await createClientForServer();
+
+  const session = await supabase.auth.getUser();
+
+  if (!session.data.user) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen gap-4">
+        <form>
+          <button
+            formAction={signInWithGoogle}
+            className="border rounded px-2.5 py-2"
+          >
+            Sign in with Google
+          </button>
+        </form>
+      </div>
+    );
+  }
+  const {
+    data: {
+      user: { user_metadata },
+    },
+  } = session;
+  const { email } = user_metadata;
+  const Email = email ? `${email}` : "email Not Set";
+
+  console.log(session);
 
   return (
-    <div>
-      {session ? (
-        <>
-          <span className="mr-2">Hello {session.user!.name}</span>
-          <Link href="/api/auth/signout">Sign Out</Link>
-        </>
-      ) : (
-        // <button onClick={() => signOut(session?.id)}>로그아웃</button>
-        // <></>
-        <Link href="/api/auth/signin">Sign In</Link>
-      )}
+    <div className="flex flex-col gap-4">
+      <p className="text-xl">Email: {Email}</p>
+
+      <form action={signOut}>
+        <button className="border rounded px-2.5 py-2" type="submit">
+          Sign Out
+        </button>
+      </form>
     </div>
   );
 }
