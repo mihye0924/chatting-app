@@ -1,5 +1,3 @@
-// src/middleware.ts 파일
-
 import { type NextRequest } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware";
 
