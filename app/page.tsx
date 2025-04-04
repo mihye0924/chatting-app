@@ -1,11 +1,10 @@
-import AuthForm from "@/components/forms/AuthForm";
-import { ThemeToggle } from "@/theme/ThemeToggle";
-
+import AuthForm from "@/components/forms/auth/index";
+import ChatForm from "@/components/chat";
 export default async function Home() {
   return (
     <>
       <AuthForm />
-      <ThemeToggle />
+      <ChatForm />
     </>
   );
 }

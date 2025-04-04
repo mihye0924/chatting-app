@@ -1,12 +1,12 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Moon, Eclipse } from "lucide-react";
+import themeStore from "@/store/theme";
 
 export function ThemeToggle() {
-  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = themeStore();
 
   useEffect(() => {
     setMounted(true);
@@ -16,10 +16,10 @@ export function ThemeToggle() {
 
   return (
     <button
-      className="fixed bottom-4 right-4 p-2 bg-buttons text-textPrimary rounded"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      className="absolute bottom-4 right-4 p-2 bg-buttons text-textPrimary rounded"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      {resolvedTheme === "dark" ? <Eclipse /> : <Moon />}
+      {theme === "dark" ? <Eclipse color="#ffffff" /> : <Moon />}
     </button>
   );
 }

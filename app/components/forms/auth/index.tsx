@@ -1,5 +1,4 @@
 import React from "react";
-import { signOut } from "@/utils/supabase/actions";
 import { createClientForServer } from "@/utils/supabase/server";
 import { signInWithGoogle } from "@/utils/supabase/actions";
 
@@ -22,27 +21,6 @@ const AuthForm = async () => {
       </div>
     );
   }
-  const {
-    data: {
-      user: { user_metadata },
-    },
-  } = session;
-  const { email } = user_metadata;
-  const Email = email ? `${email}` : "email Not Set";
-
-  console.log(session);
-
-  return (
-    <div className="flex flex-col gap-4">
-      <p className="text-xl">Email: {Email}</p>
-
-      <form action={signOut}>
-        <button className="border rounded px-2.5 py-2" type="submit">
-          Sign Out
-        </button>
-      </form>
-    </div>
-  );
 };
 
 export default AuthForm;
