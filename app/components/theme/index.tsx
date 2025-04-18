@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Moon, Eclipse } from "lucide-react";
-import themeStore from "@/store/theme";
+import { themeStore } from "@/store/theme";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);

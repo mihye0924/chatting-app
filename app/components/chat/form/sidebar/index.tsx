@@ -3,46 +3,54 @@ import { IoChatbubbleSharp } from "react-icons/io5";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { HiOutlineBell, HiOutlineBellSlash } from "react-icons/hi2";
 import { SlSettings } from "react-icons/sl";
-import sideBar from "@/store/side-bar";
+import { sideBar, sideBarAlarm } from "@/store/side-bar";
 
 const ChatSideBar = () => {
-  const { active, setActive } = sideBar();
+  const { user, chat, dot, setting, setActive } = sideBar();
+  const { alarm, setAlarm } = sideBarAlarm();
 
   return (
-    <div className="flex justify-between flex-col flex-wrap overflow-hidden w-[70px] float-left h-[100%] bg-stone-50">
-      <div className="flex-grow-[1] gap-2 flex flex-col justify-between items-center mt-[40px]">
+    <div className="bg-gray-2 float-left flex h-[100%] w-[70px] flex-col flex-wrap justify-between overflow-hidden">
+      <div className="mt-[40px] flex flex-grow-[1] flex-col items-center justify-between gap-2">
         <FaUser
           className={`${
-            active.user ? "text-[#696969]" : "text-[#d9d9d9]"
-          } text-[24px] cursor-pointer`}
-          onClick={() => setActive("user", !active.user)}
+            user ? "text-gray-5" : "text-gray-3"
+          } text-24 cursor-pointer`}
+          onClick={() => setActive("user")}
         />
         <IoChatbubbleSharp
           className={`${
-            active.chat ? "text-[#696969]" : "text-[#d9d9d9]"
-          } text-[24px] cursor-pointer`}
-          onClick={() => setActive("chat", !active.chat)}
+            chat ? "text-gray-5" : "text-gray-3"
+          } text-24 cursor-pointer`}
+          onClick={() => setActive("chat")}
         />
         <HiDotsHorizontal
           className={`${
-            active.dot ? "text-[#696969]" : "text-[#d9d9d9]"
-          } text-[24px] cursor-pointer`}
-          onClick={() => setActive("dot", !active.dot)}
+            dot ? "text-gray-5" : "text-gray-3"
+          } text-24 cursor-pointer`}
+          onClick={() => setActive("dot")}
         />
       </div>
-      <div className="flex-grow-[9] flex flex-col justify-end items-center mb-[20px] gap-5">
-        {!active.alarm ? (
+      <div className="mb-[20px] flex flex-grow-[9] flex-col items-center justify-end gap-5">
+        {!alarm ? (
           <HiOutlineBell
-            className={`text-[24px] text-[#d9d9d9] cursor-pointer`}
-            // onClick={() => setActive("alarm", "mute")}
+            className={`text-gray-3 text-24 cursor-pointer`}
+            onClick={() => setAlarm("mute")}
           />
         ) : (
           <HiOutlineBellSlash
-            className={`text-[24px] text-[#d9d9d9] cursor-pointer`}
-            // onClick={() => setActive("alarm", "un-mute")}
+            className={`text-gray-3 text-24 cursor-pointer`}
+            onClick={() => setAlarm("un-mute")}
           />
         )}
-        <SlSettings className={`text-[22px] text-[#d9d9d9] cursor-pointer`} />
+        <SlSettings
+          className={`${
+            setting
+              ? "text-gray-5 bg-gray-4 mx-1 rounded-full px-1 text-[30px]"
+              : "text-gray-3 px-1 text-[30px]"
+          } cursor-pointer`}
+          onClick={() => setActive("setting")}
+        />
       </div>
     </div>
   );

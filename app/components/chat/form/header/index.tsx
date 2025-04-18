@@ -1,7 +1,7 @@
 const ChatHeader = () => {
   return (
     <header className="h-[40px] border-none">
-      <h1 className="leading-[40px] pl-4 inline font-semibold">친구</h1>
+      <h1 className="inline pl-4 font-semibold leading-[40px]">친구</h1>
     </header>
   );
 };

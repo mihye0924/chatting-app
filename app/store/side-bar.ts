@@ -1,56 +1,58 @@
 import { create } from "zustand";
-
+import { persist } from "zustand/middleware";
+type TabKey = "user" | "chat" | "dot" | "setting";
 interface SideBarProps {
-  active: {
-    user: boolean;
-    chat: boolean;
-    dot: boolean;
-  };
-  setActive: (item: "user" | "chat" | "dot", status: boolean) => void;
+  user: boolean;
+  chat: boolean;
+  dot: boolean;
+  setting: boolean;
+  setActive: (key: TabKey) => void;
 }
 
-const sideBar = create<SideBarProps>((set) => {
-  const savedState = localStorage.getItem("side-bar");
-  const initialState = savedState
-    ? JSON.parse(savedState)
-    : {
-        user: true,
-        chat: false,
-        dot: false,
-      };
+export const sideBar = create<SideBarProps>()(
+  persist(
+    (set, get) => ({
+      user: true,
+      chat: false,
+      dot: false,
+      setting: false,
+      setActive: (key) => {
+        const current = get()[key]; // 현재 상태 확인
+        if (current) {
+          // 이미 눌려있는 탭이면 전부 false로
+          set({ user: false, chat: false, dot: false });
+        } else {
+          // 누른 탭만 true, 나머지는 false
+          set({
+            user: key === "user",
+            chat: key === "chat",
+            dot: key === "dot",
+            setting: key === "setting",
+          });
+        }
+      },
+    }),
+    {
+      name: "side-bar", // localStorage에 저장됨
+    }
+  )
+);
 
-  const resetOtherStates = (
-    state: typeof initialState,
-    item: "user" | "chat" | "dot"
-  ) => {
-    return {
-      user: item === "user" ? true : false,
-      chat: item === "chat" ? true : false,
-      dot: item === "dot" ? true : false,
-    };
-  };
+interface SideBarAlarmProps {
+  alarm: boolean;
+  setAlarm: (status: string) => void;
+}
 
-  const updateState = (
-    state: typeof initialState,
-    newState: typeof initialState
-  ) => {
-    localStorage.setItem("side-bar", JSON.stringify(newState));
-    return { active: newState };
-  };
-
-  return {
-    active: initialState,
-    setActive: (item, status) => {
-      set((state) => {
-        let newActiveState = { ...state.active };
-
-        newActiveState = resetOtherStates(state.active, item);
-        newActiveState[item] = status;
-
-        return updateState(state, newActiveState);
-      });
-    },
-  };
-});
-
-export default sideBar;
+export const sideBarAlarm = create<SideBarAlarmProps>()(
+  persist(
+    (set) => ({
+      alarm: false,
+      setAlarm: (status: string) => {
+        set({ alarm: status === "mute" ? true : false }); // <-- 여기 'theme' → 'alarm' 으로 키 맞춰줘야 해요!
+      },
+    }),
+    {
+      name: "alarm", // localStorage 키 이름
+    }
+  )
+);
