@@ -15,7 +15,7 @@ const signInWith = (provider: Provider) => async () => {
     },
   });
   if (error) {
-    console.log(error);
+    console.log(error, "error");
   }
 
   redirect(data.url as string);

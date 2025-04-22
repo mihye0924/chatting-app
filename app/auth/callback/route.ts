@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { createClientForServer } from "@/utils/supabase/server";
 
 export async function GET(request: NextRequest) {
@@ -14,10 +13,8 @@ export async function GET(request: NextRequest) {
       const forwardedHost = request.headers.get("x-forwarded-host");
       const isLocalEnv = process.env.NODE_ENV === "development";
       if (isLocalEnv) {
-        console.log(`${origin}${next}`, "development");
         return NextResponse.redirect(`${origin}${next}`);
       } else if (forwardedHost) {
-        console.log(`https://${forwardedHost}${next}`, "origin");
         return NextResponse.redirect(`https://${forwardedHost}${next}`);
       } else {
         return NextResponse.redirect(`${origin}${next}`);
