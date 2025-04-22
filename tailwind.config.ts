@@ -15,7 +15,14 @@ export default {
         pretendard: ["var(--font-pretendard)"],
       },
       fontSize: {
+        14: "0.8rem",
+        16: "1rem",
         24: "1.6rem",
+      },
+      fontWeight: {
+        light: "400",
+        medium: "500",
+        bold: "600",
       },
       colors: {
         transparent: "transparent",
@@ -25,8 +32,19 @@ export default {
           3: "#d9d9d9",
           4: "#e4e4e4",
           5: "#696969",
+          6: "#c8c8c8",
+          disabled: "#dadada",
         },
-        pink: "#ff4c87",
+        black: {
+          0: "black",
+          opacity: "#000000ba",
+        },
+        lightgray: "#ececec",
+      },
+      borderColor: {
+        gray: {
+          disabled: "#adadad",
+        },
       },
       borderRadius: {
         sm: "1rem",

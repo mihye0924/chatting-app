@@ -1,13 +1,12 @@
 "use client";
-import ChatSideBar from "@/components/chat/form/sidebar";
-import ChatForm from "@/components/chat/form";
+import ChatSideBar from "@/components/chat/ChatSideBar";
+import ChatForm from "@/components/chat/ChatForm";
 import { useEffect, useState } from "react";
 
 const ChatWrap = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // F5, Ctrl+R, Command+R 방지
       if (
         e.key === "F5" ||
         (e.ctrlKey && e.key === "r") ||
@@ -26,10 +25,9 @@ const ChatWrap = () => {
   }, []);
   if (!mounted) return null;
   return (
-    <div className="border-gray-1 relative h-[600px] w-[430px] overflow-hidden rounded-sm border">
+    <div className="relative h-[600px] w-[430px] rounded-sm border border-gray-1">
       <ChatSideBar />
       <ChatForm />
-      {/* <ThemeToggle /> */}
     </div>
   );
 };

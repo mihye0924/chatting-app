@@ -1,3 +1,4 @@
+"use client";
 const ChatHeader = () => {
   return (
     <header className="h-[40px] border-none">

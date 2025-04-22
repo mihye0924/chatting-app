@@ -16,7 +16,7 @@ export function ThemeToggle() {
 
   return (
     <button
-      className="absolute bottom-4 right-4 p-2 bg-buttons text-textPrimary rounded"
+      className="bg-buttons text-textPrimary absolute bottom-4 right-4 rounded p-2"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? <Eclipse color="#ffffff" /> : <Moon />}
