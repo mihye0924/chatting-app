@@ -1,8 +1,10 @@
 "use client";
 import { signOut } from "@/utils/supabase/actions";
 import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 const Setting = () => {
+  const router = useRouter();
   const items = [
     {
       id: 1,
@@ -20,26 +22,28 @@ const Setting = () => {
 
   const handleSetting = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      console.log(e.currentTarget.innerText, "item");
+      // console.log("target: ", e.currentTarget.innerText);
       switch (e.currentTarget.innerText) {
         case "환경설정":
           break;
         case "잠금모드":
+          router.push("/lock");
           break;
         case "로그아웃":
+          localStorage.removeItem("user");
           signOut();
           break;
         default:
           return false;
       }
     },
-    [],
+    [router],
   );
   return (
-    <div className="bg-black-opacity absolute bottom-[20px] left-[55px] rounded-[0.5rem] p-1 text-sm">
+    <div className="absolute bottom-[20px] left-[55px] rounded-[0.5rem] bg-black-opacity p-1 text-sm">
       {items.map((item) => (
         <button
-          className="hover:text-black-0 cursor-pointer px-2 text-white hover:rounded-[0.2rem] hover:bg-white"
+          className="cursor-pointer px-2 text-white hover:rounded-[0.2rem] hover:bg-white hover:text-black-0"
           key={item.id}
           onClick={(e) => handleSetting(e)}
         >
