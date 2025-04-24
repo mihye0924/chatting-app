@@ -6,7 +6,7 @@ import { cn } from "@/lib/clsx";
 const InputVariants = cva(``, {
   variants: {
     variant: {
-      default: `border-gray-1 disabled:opacity-2 disabled:text-gray-5 disabled:bg-gray-disabled focus:border-gray-1 block w-full border bg-gray-50 px-2.5 py-2 text-sm text-black-0 focus:border focus:outline-none`,
+      default: `border-gray-1 disabled:opacity-2 disabled:text-gray-5 disabled:bg-gray-disabled focus:border-gray-1 block w-full border bg-gray-50 px-2.5 py-2 text-sm text-black-0 focus:border focus:outline-none disabled:hover:border disabled:hover:border-gray-3 disabled:hover:cursor-default`,
     },
   },
   defaultVariants: {
@@ -35,6 +35,7 @@ export const InputText: FC<InputProps> = ({
           id={id}
           type={props.type}
           className={cn(InputVariants({ variant }), className)}
+          value={label}
           {...props}
         />
       ) : (

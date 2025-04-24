@@ -4,13 +4,13 @@ import { IoChatbubbleSharp } from "react-icons/io5";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { HiOutlineBell, HiOutlineBellSlash } from "react-icons/hi2";
 import { SlSettings } from "react-icons/sl";
-import { sideBar, sideBarAlarm } from "@/store/side-bar";
+import { sideBarStore, sideBarAlarmStore } from "@/store/side-bar";
 import { useState } from "react";
 import Setting from "@/components/chat/Setting";
 
 const ChatSideBar = () => {
-  const { user, chat, dot, setActive } = sideBar();
-  const { alarm, setAlarm } = sideBarAlarm();
+  const { user, chat, more, setActive } = sideBarStore();
+  const { alarm, setAlarm } = sideBarAlarmStore();
   const [setting, setSetting] = useState(false);
 
   return (
@@ -30,9 +30,9 @@ const ChatSideBar = () => {
         />
         <HiDotsHorizontal
           className={`${
-            dot ? "text-gray-5" : "text-gray-3"
+            more ? "text-gray-5" : "text-gray-3"
           } cursor-pointer text-24`}
-          onClick={() => setActive("dot")}
+          onClick={() => setActive("more")}
         />
       </div>
       <div className="mb-[20px] flex flex-grow-[9] flex-col items-center justify-end gap-5">

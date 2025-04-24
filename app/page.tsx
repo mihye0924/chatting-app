@@ -1,11 +1,13 @@
-import AuthForm from "@/components/auth/AuthForm";
-import { createClientForServer } from "@/utils/supabase/server";
-import ChatForm from "@/components/chat/ChatWrap";
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const Home = async () => {
-  const supabase = await createClientForServer();
-  const session = await supabase.auth.getUser();
+const Home = () => {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/signin");
+  }, [router]);
 
-  return <>{!session.data.user ? <AuthForm /> : <ChatForm />}</>;
+  return <></>;
 };
 export default Home;

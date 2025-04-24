@@ -8,7 +8,7 @@ const ButtonVariants = cva(``, {
   variants: {
     variant: {
       default:
-        "bg-white text-black-0 active:bg-gray-disabled hover:bg-gray-disabled border border-gray-3 hover:border hover:border-gray-5",
+        "bg-white text-black-0 active:bg-gray-disabled hover:bg-gray-disabled border border-gray-3 hover:border hover:border-gray-5 disabled:bg-gray-6 disabled:hover:cursor-default disabled:text-gray-5 disabled:hover:border disabled:hover:border-gray-3",
     },
     shape: {
       square: "rounded-none",
@@ -48,11 +48,16 @@ export const Button: FC<ButtonProps> = ({
   width,
   weight,
   children,
+  className,
   ...props
 }) => {
   return (
     <button
-      className={cn(ButtonVariants({ variant, width, shape, size, weight }))}
+      disabled={props.disabled}
+      className={cn(
+        ButtonVariants({ variant, width, shape, size, weight }),
+        className,
+      )}
       {...props}
     >
       {children}
