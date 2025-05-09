@@ -4,7 +4,8 @@ import kakaoLogo from "@/assets/images/logo_kakao.svg";
 import { InputText } from "@/components/common/InputText";
 import SignInForm from "@/components/auth/SignInForm";
 import { Button } from "@/components/common/Button";
-import { signInWithGoogle } from "@/utils/supabase/actions";
+import { signInWithGoogle } from "./actions";
+
 const SignIn = () => {
   return (
     <div className="relative h-[600px] w-[430px] rounded-sm border border-gray-1 bg-lightgray scrollbar-hide">
@@ -35,7 +36,7 @@ const SignIn = () => {
           </Button>
         </div>
         <div className="mx-auto mt-2">
-          <InputText type="radio" id="save-login" label="자동로그인" />
+          <InputText type="radio" id="save-signin" label="자동로그인" />
         </div>
       </div>
       <ul className="absolute bottom-10 left-1/2 flex w-[220px] translate-x-[-50%] items-center justify-between">

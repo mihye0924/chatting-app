@@ -3,14 +3,14 @@ import React, { useActionState, useState } from "react";
 import { Button } from "@/components/common/Button";
 import { InputText } from "@/components/common/InputText";
 import { useRouter } from "next/navigation";
-import { signupWithEmailPassword } from "@/utils/supabase/actions";
+import { signUpWithEmailPassword } from "@/signin/actions";
 
 const AuthForm = () => {
   const router = useRouter();
   const [idInput, setIdInput] = useState("");
   const [pwInput, setPwInput] = useState("");
   const [error, formAction, isPending] = useActionState(
-    signupWithEmailPassword,
+    signUpWithEmailPassword,
     null,
   );
 

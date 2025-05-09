@@ -1,5 +1,4 @@
 import LockForm from "@/components/auth/LockForm";
-// import { createClientForServer } from "@/utils/supabase/server";
 
 const Lock = async () => {
   return (

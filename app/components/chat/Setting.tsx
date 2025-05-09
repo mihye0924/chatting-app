@@ -1,5 +1,5 @@
 "use client";
-import { signOut } from "@/utils/supabase/actions";
+import { signOut } from "@/signin/actions";
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 

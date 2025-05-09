@@ -1,40 +1,16 @@
 "use client";
-import React, { useActionState, useCallback, useEffect, useState } from "react";
-import { signinWithEmailPassword } from "@/utils/supabase/actions";
+import React, { useActionState, useState } from "react";
 import { InputText } from "@/components/common/InputText";
-import { userStore } from "@/store/user";
-import { useRouter } from "next/navigation";
-import { Button } from "../common/Button";
-type DataTypes = { user?: object; message?: string };
+import { Button } from "@/components/common/Button";
+import { signInWithEmail } from "@/signin/actions";
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [pwInput, setPwInput] = useState("");
-  const { setUser } = userStore();
-  const router = useRouter();
-  const [result, formAction, isPending] = useActionState(
-    signinWithEmailPassword,
-    null,
-  );
-  const [data, setData] = useState<DataTypes>({});
-  useEffect(() => {
-    if (result) {
-      setData(result);
-    }
-    if (data.user) {
-      setUser(data.user);
-      router.push("/chat");
-    }
-  }, [data, result, router, setUser]);
+  const [result, formAction, isPending] = useActionState(signInWithEmail, null);
 
-  const handleSubmit = useCallback(
-    (formData: FormData) => {
-      formAction(formData);
-    },
-    [formAction],
-  );
   return (
     <>
-      <form action={handleSubmit} className="mx-auto flex flex-col">
+      <form action={formAction} className="mx-auto flex flex-col">
         <InputText
           type="text"
           placeholder="이메일"
